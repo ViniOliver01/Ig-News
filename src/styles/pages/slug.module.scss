@@ -1,0 +1,143 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+}
+
+.post{
+    max-width: 728px;
+    display: flex;
+    flex-direction: column;
+
+    h1{
+        color: var(--white);
+        font-size: 3.375rem;
+        line-height: 3.75rem;
+        font-weight: 900;
+
+        margin-bottom: 1.5rem;
+    }
+    time{
+        color: var(--gray-300);
+        font-size: 1rem;
+        line-height: 1.625rem;
+
+        margin-bottom: 2rem;
+
+        & + *{
+            margin-top: 2rem; 
+        }
+    }
+
+}
+
+.continueReading{  
+    text-align: center;
+    padding: 1.7rem;
+    border-radius: 100px;
+    margin: 4rem 0 2rem;
+    background: var(--gray-850);
+    
+    -webkit-text-fill-color: var(--white);
+    font-weight: bold;
+    font-size: 1.25rem;
+
+    a{
+        -webkit-text-fill-color: var(--yellow-500);
+        margin-left: 0.5rem;
+
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+}
+
+.postContent {
+    max-width: 728px;
+    display: flex;
+    flex-direction: column;
+
+    &.previewContent {
+        background: linear-gradient(var(--gray-100), transparent);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    h1{
+        color: var(--white);
+        font-size: 3.375rem;
+        line-height: 3.75rem;
+        font-weight: 900;
+
+        margin-bottom: 1.5rem;
+    }
+
+    h2{
+        color: var(--gray-100);
+        font-size: 1.5rem;
+        line-height: 1.875rem;
+        font-weight: bold;
+
+        margin-top: 4rem;
+        margin-bottom: 1.125rem;
+        
+    }
+    h3{
+        color: var(--gray-100);
+        font-size: 1.5rem;
+        line-height: 1.875rem;
+        font-weight: bold;
+
+        margin-top: 4rem;
+        margin-bottom: 1.125rem;
+        
+    }
+    cite{
+        margin-top: 1rem;
+        margin-bottom: 4rem;
+        align-self: center;
+        font-style: normal;
+    }
+    p{
+        color: var(--gray-100);
+        font-size: 1.125rem;
+        line-height: 1.875rem;
+
+        & + p {
+            margin-top: 1.125rem;
+        }
+
+        & + li{
+            margin-top: 2rem;
+        }
+    }
+
+    li{
+        color: var(--gray-100);
+        font-size: 1.125rem;
+        line-height: 1.875rem;
+
+        margin-left: 2rem;
+        padding-block: 0.5rem;
+
+        & + :not(li){
+            margin-top: 2rem;
+        }
+    }
+
+    img{
+        align-self: center;
+        margin-top: 3rem;
+        padding-inline: 2rem;
+        max-width: 100%;
+        height: auto;
+    }
+    
+    iframe{
+        margin-block: 4rem;
+        border: none;
+    }
+}
