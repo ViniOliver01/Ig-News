@@ -1,20 +1,20 @@
-import Link, { LinkProps } from 'next/link';
-import { useRouter } from 'next/router';
+import Link, { LinkProps } from "next/link";
+import { useRouter } from "next/router";
 
-interface ActiveLinkProps extends LinkProps{
-    children: string;
-    activeClassName: string;
+interface ActiveLinkProps extends LinkProps {
+  children: string;
+  activeClassName: string;
 }
 
-export default function ActiveLink({children, activeClassName, ...rest}: ActiveLinkProps){
-    const {pathname} = useRouter()
-    const path = "/"+pathname.split('/')[1]
-    
-    const className = (path == rest.href ? activeClassName : '')
+export default function ActiveLink({ children, activeClassName, ...rest }: ActiveLinkProps) {
+  const { asPath } = useRouter();
+  const path = "/" + asPath.split("/")[1];
 
-    return (
+  const className = path == rest.href ? activeClassName : "";
+
+  return (
     <Link {...rest} className={className}>
-        {children}
+      {children}
     </Link>
-    );
+  );
 }
