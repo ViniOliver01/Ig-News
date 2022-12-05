@@ -4,6 +4,9 @@ import styles from "../../styles/pages/posts.module.scss";
 import { getPrismicClient } from "./../../services/prismic";
 import { RichText } from "prismic-dom";
 import Link from "next/link";
+import { useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 interface PostsProps {
   posts: Post[];
@@ -17,6 +20,9 @@ interface Post {
 }
 
 export default function Posts({ posts }: PostsProps) {
+  const session = useSession();
+  console.log("🚀 / Posts / session", session);
+
   return (
     <>
       <Head>
@@ -26,15 +32,27 @@ export default function Posts({ posts }: PostsProps) {
       <main className={styles.container}>
         <div className={styles.posts}>
           {posts.map((post) => {
-            return (
-              <Link key={post.slug} href={`/posts/preview/${post.slug}`}>
-                <>
-                  <time>{post.updatedAt}</time>
-                  <strong>{post.title}</strong>
-                  <p>{post.excerpt}</p>
-                </>
-              </Link>
-            );
+            if (session?.data?.activeSubscription) {
+              return (
+                <Link key={post.slug} href={`/posts/${post.slug}`}>
+                  <>
+                    <time>{post.updatedAt}</time>
+                    <strong>{post.title}</strong>
+                    <p>{post.excerpt}</p>
+                  </>
+                </Link>
+              );
+            } else {
+              return (
+                <Link key={post.slug} href={`/posts/preview/${post.slug}`}>
+                  <>
+                    <time>{post.updatedAt}</time>
+                    <strong>{post.title}</strong>
+                    <p>{post.excerpt}</p>
+                  </>
+                </Link>
+              );
+            }
           })}
         </div>
       </main>
