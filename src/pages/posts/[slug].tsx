@@ -4,6 +4,7 @@ import styles from "../../styles/pages/slug.module.scss";
 import { getPrismicClient } from "../../services/prismic";
 import { RichText } from "prismic-dom";
 import { getSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 interface PostProps {
   post: Post;
@@ -36,6 +37,12 @@ interface Content {
 }
 
 export default function Post({ post }: PostProps) {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <h1>Carregando...</h1>;
+  }
+
   return (
     <>
       <Head>
