@@ -4,9 +4,11 @@ import styles from "../../../styles/pages/slug.module.scss";
 import { getPrismicClient } from "../../../services/prismic";
 import { RichText } from "prismic-dom";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { api } from "../../../services/api";
+import { getStripeJs } from "../../../services/stripe-js";
 
 interface PostPreviewProps {
   post: Post;
@@ -42,6 +44,27 @@ interface Content {
 export default function PostPreview({ post }: PostPreviewProps) {
   const session = useSession();
   const router = useRouter();
+
+  async function handleSubscribe() {
+    if (!session) {
+      signIn("github");
+      return;
+    }
+
+    if (session?.data?.activeSubscription) {
+      router.push("/posts");
+      return;
+    }
+
+    try {
+      const response = await api.post("/subscribe");
+      const { sessionId } = response.data;
+      const stripe = await getStripeJs();
+      await stripe.redirectToCheckout({ sessionId });
+    } catch (err) {
+      alert(err.message);
+    }
+  }
 
   useEffect(() => {
     if (session?.data?.activeSubscription) {
@@ -104,7 +127,9 @@ export default function PostPreview({ post }: PostPreviewProps) {
           })}
           <div className={styles.continueReading}>
             Wanna continue reading?
-            <Link href="#"> Subscribe now 🤗</Link>
+            <Link href="#" onClick={handleSubscribe}>
+              Subscribe now 🤗
+            </Link>
           </div>
         </div>
       </div>
