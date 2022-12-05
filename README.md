@@ -1,4 +1,3 @@
-
 # 🚀 Ig News
 
 Este é um projeto de blog com o intuito de apresentar seus posts completos apenas 
@@ -11,6 +10,9 @@ como uma interface amigavel ao editor.
 A aplicação conta com o sistema de autenticação pelo **NextAuth** provendo um sistema simples de login através do serviço oAuth do
 próprio **Github**. E tudo isso com o deploy da aplicação feito pelo **Vercel**, serviço o qual escolhi pela facil 
 implementação, custo zero e suporte ao **SSR (Server Side Rendering)**
+
+E após a finalização do projeto foi feito os testes com o **Jest** afim de verificar cada componente e página, para ter
+certeza que está tudo rodando conforme planejado
 
 
 ## 📒 Aprendizados
